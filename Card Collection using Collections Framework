@@ -1,0 +1,29 @@
+import java.util.*;
+
+class CardCollection {
+    static Map<String, List<String>> cardMap = new HashMap<>();
+
+    public static void addCard(String symbol, String card) {
+        if (!cardMap.containsKey(symbol)) {
+            cardMap.put(symbol, new ArrayList<>());
+        }
+        cardMap.get(symbol).add(card);
+    }
+
+    public static void findCards(String symbol) {
+        System.out.println("Name: Sanchit Baydal");
+        System.out.println("Cards in '" + symbol + "': " + cardMap.getOrDefault(symbol, new ArrayList<>()));
+    }
+
+    public static void main(String[] args) {
+        addCard("Spades", "Ace");
+        addCard("Spades", "King");
+        addCard("Hearts", "Queen");
+        addCard("Diamonds", "Jack");
+        addCard("Clubs", "10");
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter symbol: ");
+        findCards(sc.nextLine());
+    }
+}

@@ -1,0 +1,89 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class Employee {
+    int id;
+    String name;
+    double salary;
+
+    Employee(int id, String name, double salary) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public String toString() {
+        return "ID: " + id + ", Name: " + name + ", Salary: " + salary;
+    }
+}
+
+public class EmployeeManager {
+    static ArrayList<Employee> employees = new ArrayList<>();
+    static Scanner sc = new Scanner(System.in);
+
+    public static void addEmployee() {
+        System.out.print("Enter ID, Name, Salary: ");
+        int id = sc.nextInt();
+        String name = sc.next();
+        double salary = sc.nextDouble();
+        employees.add(new Employee(id, name, salary));
+    }
+
+    public static void updateEmployee() {
+        System.out.print("Enter Employee ID to Update: ");
+        int id = sc.nextInt();
+        for (Employee emp : employees) {
+            if (emp.id == id) {
+                System.out.print("Enter New Name and Salary: ");
+                emp.name = sc.next();
+                emp.salary = sc.nextDouble();
+                return;
+            }
+        }
+        System.out.println("Employee not found.");
+    }
+
+    public static void removeEmployee() {
+        System.out.print("Enter Employee ID to Remove: ");
+        int id = sc.nextInt();
+        employees.removeIf(emp -> emp.id == id);
+    }
+
+    public static void searchEmployee() {
+        System.out.print("Enter Employee ID to Search: ");
+        int id = sc.nextInt();
+        for (Employee emp : employees) {
+            if (emp.id == id) {
+                System.out.println(emp);
+                return;
+            }
+        }
+        System.out.println("Employee not found.");
+    }
+
+    public static void displayEmployees() {
+        if (employees.isEmpty()) {
+            System.out.println("No employees found.");
+            return;
+        }
+        for (Employee emp : employees) {
+            System.out.println(emp);
+        }
+    }
+
+    public static void main(String[] args) {
+        while (true) {
+            System.out.println("\n1. Add  2. Update  3. Remove  4. Search  5. Display  6. Exit");
+            System.out.print("Choose an option: ");
+            switch (sc.nextInt()) {
+                case 1 -> addEmployee();
+                case 2 -> updateEmployee();
+                case 3 -> removeEmployee();
+                case 4 -> searchEmployee();
+                case 5 -> displayEmployees();
+                case 6 -> System.exit(0);
+                default -> System.out.println("Invalid choice.");
+            }
+        }
+    }
+}
